@@ -3,6 +3,9 @@ require 'sinatra/reloader'
 require_relative 'lib/bookmark'
 
 class BookmarkManager < Sinatra::Base
+
+  enable :sessions, :method_override
+
   configure :development do
     register Sinatra::Reloader
   end
@@ -21,5 +24,10 @@ class BookmarkManager < Sinatra::Base
     erb :'bookmarks/index'
   end
 
-  run! if app_file == $0
+  delete '/bookmarks/:id' do
+    Bookmark.delete(id: params[:id])
+    redirect '/bookmarks'
+  end
+
+  run! if app_file == $PROGRAM_NAME
 end

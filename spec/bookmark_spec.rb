@@ -4,11 +4,10 @@ require 'database_helpers'
 describe Bookmark do
   describe '#.all' do
     it 'returns a list of bookmarks' do
-
       bookmark = Bookmark.create(url: 'http://www.makersacademy.com/', title: 'Makers')
       Bookmark.create(url: 'http://www.destroyallsoftware.com', title: 'Destroy Software')
       Bookmark.create(url: 'http://www.google.com/', title: 'Google')
-      
+
       bookmarks = Bookmark.all
 
       # expect(bookmarks).to include("http://www.makersacademy.com/")
@@ -24,7 +23,7 @@ describe Bookmark do
 
   describe '#.create' do
     it 'creates a new bookmark' do
-      bookmark = Bookmark.create(url: "http://www.reddit.com/", title: 'Reddit')
+      bookmark = Bookmark.create(url: 'http://www.reddit.com/', title: 'Reddit')
       persisted_data = persisted_data(id: bookmark.id)
 
       # expect(bookmark['url']).to eq "http://www.reddit.com/"
@@ -33,6 +32,16 @@ describe Bookmark do
       expect(bookmark.id).to eq persisted_data['id']
       expect(bookmark.title).to eq 'Reddit'
       expect(bookmark.url).to eq 'http://www.reddit.com/'
+    end
+  end
+
+  describe '#.delete' do
+    it 'delete the selected bookmark' do
+      bookmark = Bookmark.create(url: 'http://www.reddit.com/', title: 'Reddit')
+
+      Bookmark.delete(id: bookmark.id)
+
+      expect(Bookmark.all.length).to eq 0
     end
   end
 end
