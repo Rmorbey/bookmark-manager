@@ -1,0 +1,18 @@
+
+<h2>Update a bookmark</h2>
+
+Current bookmark: http://www.makersacademy.com/ Current title: Makers
+
+</label>
+<form action="/bookmarks/<%= bookmark.id %>" method="post">
+<input type='hidden' name='_method' value='PATCH'/>
+  <label for="bookmark">
+    Create bookmark
+    <input type="text" name="bookmark" placeholder="URL" />
+  </label>
+  <label for="title">
+    Enter title
+    <input type="text" name="title" placeholder="Title" />
+  </label>
+  <input type="submit" value="Update Bookmark" />
+</form>

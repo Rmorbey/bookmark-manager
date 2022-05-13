@@ -29,5 +29,15 @@ class BookmarkManager < Sinatra::Base
     redirect '/bookmarks'
   end
 
+  patch '/bookmarks/:id' do
+    'Hello'
+  end
+
+  get '/bookmarks/update/:id' do
+    p params
+    # @current_bookmark = Bookmark.find(id: params[:id])
+    erb :'bookmarks/update'
+  end
+
   run! if app_file == $PROGRAM_NAME
 end
