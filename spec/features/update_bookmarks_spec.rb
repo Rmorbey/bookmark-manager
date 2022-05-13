@@ -1,11 +1,12 @@
 feature 'updating bookmarks' do
   scenario 'user can update bookmarks' do
-    Bookmark.create(url: 'http://www.makersacademy.com/', title: 'Makers')
+    bookmark = Bookmark.create(url: 'http://www.makersacademy.com/', title: 'Makers')
 
     visit('/bookmarks')
     expect(page).to have_link('Makers', href: 'http://www.makersacademy.com/')
 
     first('.bookmark').click_button 'Update'
+    expect(current_path).to eq "/bookmarks/update/#{bookmark.id}"
 
     expect(page).to have_content 'http://www.makersacademy.com/'
     expect(page).to have_content 'Makers'

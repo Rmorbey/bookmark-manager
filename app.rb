@@ -30,7 +30,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   patch '/bookmarks/:id' do
-    'Hello'
+    # Bookmark.update(id: params[:id], url: params[:url], title: params[:title])
   end
 
   get '/bookmarks/update/:id' do

@@ -44,6 +44,20 @@ describe Bookmark do
       expect(Bookmark.all.length).to eq 0
     end
   end
+
+  describe '#.find' do
+    it 'returns a bookmark instance from the database with the correct information for a given bookmark id' do
+      connection = PG.connect(dbname: 'bookmark_manager_test')
+      connection.exec('DROP TABLE bookmarks;')
+      connection.exec('CREATE TABLE bookmarks(id SERIAL PRIMARY KEY, url VARCHAR(60), title VARCHAR(60));')
+      Bookmark.create(url: 'http://www.makersacademy.com/', title: 'Makers')
+      selected_bookmark = Bookmark.find(id: 1)
+      expect(selected_bookmark.id).to eq("1")
+      expect(selected_bookmark.title).to eq("Makers")
+      expect(selected_bookmark.url).to eq("http://www.makersacademy.com/")
+    end
+  end
+
 end
 
 # Test drive an update to the .all method of your Bookmark model, to do the following:
